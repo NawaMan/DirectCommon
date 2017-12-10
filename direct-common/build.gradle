@@ -1,6 +1,6 @@
 def thisGroup    = 'directcommon'
 def thisArtifact = 'direct-common'
-def thisVersion  = '1.0.7-SNAPSHOT'
+def thisVersion  = '1.0.8-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -69,4 +69,9 @@ task sourceJar(type: Jar) {
 task packageJavadoc(type: Jar) {
     from javadoc
     classifier = 'javadoc'
+}
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-parameters"
+    }
 }
