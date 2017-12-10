@@ -31,7 +31,7 @@ public class Nulls {
     /**
      * Returns {@code true} if theGivenObject is null. 
      * 
-     * @param theGivenObject
+     * @param theGivenObject the given object.
      * @return {@code true} if theGivenObject is null.
      **/
     public boolean isNull(Object theGivenObject) {
