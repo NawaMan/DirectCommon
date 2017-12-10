@@ -1,14 +1,32 @@
+def thisGroup    = 'directcommon'
+def thisArtifact = 'direct-common'
+def thisVersion  = '1.0.7-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
-group = 'directcommon'
-version = '1.0.2-SNAPSHOT'
+group   = thisGroup
+version = thisVersion
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
 repositories {
     jcenter()
@@ -19,31 +37,36 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-tasks.withType(Javadoc).all { enabled = false }
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId 'directcommon'
-            artifactId 'common'
-            version '1.0.2-SNAPSHOT'
-            
             from components.java
+
+            artifact sourceJar
+            artifact packageJavadoc
         }
     }
 }
 
-artifacts {
-    archives sourcesJar
-    archives javadocJar
+javadoc {
+  source = sourceSets.main.allJava
+  classpath = configurations.compileClasspath
+
+  options
+  {
+    setMemberLevel JavadocMemberLevel.PUBLIC
+    setAuthor true
+
+    links "https://docs.oracle.com/javase/8/docs/api/"
+  }
+}
+
+task sourceJar(type: Jar) {
+  classifier = 'sources'
+  from sourceSets.main.allJava
+}
+
+task packageJavadoc(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
 }
