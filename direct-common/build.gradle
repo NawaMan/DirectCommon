@@ -1,6 +1,6 @@
 def thisGroup    = 'directcommon'
 def thisArtifact = 'direct-common'
-def thisVersion  = '1.0.8-SNAPSHOT'
+def thisVersion  = '1.0.9'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -14,6 +14,19 @@ version = thisVersion
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+// Dependencies
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    compile     'org.projectlombok:lombok:1.16.16'
+    testCompile 'junit:junit:4.12'
+}
+
+// IDE
 
 eclipse {
     classpath {
@@ -28,20 +41,13 @@ idea {
     }
 }
 
-repositories {
-    jcenter()
-}
-
-dependencies {
-    compile     'org.projectlombok:lombok:1.16.16'
-    testCompile 'junit:junit:4.12'
-}
+// Building/Publishing
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-
+            
             artifact sourceJar
             artifact packageJavadoc
         }
@@ -49,21 +55,20 @@ publishing {
 }
 
 javadoc {
-  source = sourceSets.main.allJava
-  classpath = configurations.compileClasspath
-
-  options
-  {
-    setMemberLevel JavadocMemberLevel.PUBLIC
-    setAuthor true
-
-    links "https://docs.oracle.com/javase/8/docs/api/"
-  }
+    source = sourceSets.main.allJava
+    classpath = configurations.compileClasspath
+    
+    options {
+        setMemberLevel JavadocMemberLevel.PUBLIC
+        setAuthor true
+        
+        links "https://docs.oracle.com/javase/8/docs/api/"
+    }
 }
 
 task sourceJar(type: Jar) {
-  classifier = 'sources'
-  from sourceSets.main.allJava
+    classifier = 'sources'
+    from sourceSets.main.allJava
 }
 
 task packageJavadoc(type: Jar) {
@@ -71,7 +76,5 @@ task packageJavadoc(type: Jar) {
     classifier = 'javadoc'
 }
 gradle.projectsEvaluated {
-    tasks.withType(JavaCompile) {
-        options.compilerArgs << "-parameters"
-    }
+    tasks.withType(JavaCompile) { options.compilerArgs << "-parameters" }
 }
