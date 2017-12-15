@@ -55,7 +55,7 @@ public class Nulls {
      * @param  elseValue 
      * @return theGivenObject if not null or elseValue if null.
      **/
-    public <T> T or(T theGivenObject, T elseValue) {
+    public <T> T orElse(T theGivenObject, T elseValue) {
         return (theGivenObject == null) ? elseValue : theGivenObject;
     }
     
@@ -76,7 +76,7 @@ public class Nulls {
      * @param elseSupplier 
      * @return theGivenObject if not null or value from the elseSupplier if null.
      **/
-    public <T> T or(T theGivenObject, Supplier<? extends T> elseSupplier) {
+    public <T> T orElseGet(T theGivenObject, Supplier<? extends T> elseSupplier) {
         return (theGivenObject == null) ? elseSupplier.get() : theGivenObject;
     }
     
