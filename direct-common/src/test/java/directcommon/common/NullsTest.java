@@ -2,6 +2,7 @@ package directcommon.common;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.junit.Test;
@@ -42,6 +43,15 @@ public class NullsTest {
         assertEquals(IntOf(1234), i.as(Integer.class));
         assertEquals(null,        i.as(Double.class));
         assertEquals(0.0,         i.as(Double.class).or(0.0), 0.0);
+    }
+    
+    @Test
+    public void testMapTo() {
+        val normalString = "String";
+        val nullString   = (String)null;
+        val itsLength    = (Function<String, Integer>)String::length;
+        assertEquals( 6, normalString.mapTo(itsLength).or(-1));
+        assertEquals(-1, nullString  .mapTo(itsLength).or(-1));
     }
     
 }

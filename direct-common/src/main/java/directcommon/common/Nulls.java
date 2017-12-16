@@ -16,6 +16,7 @@
 package directcommon.common;
 
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -126,6 +127,17 @@ public class Nulls {
         if (theClass.isInstance(theGivenObject))
             return theClass.cast(theGivenObject);
         return null;
+    }
+    
+    /**
+     * Map the given object using the transformation if the given object is not null or else return null.
+     * 
+     * @param theGivenObject  the given object.
+     * @param transformation  the transformation function.
+     * @return  the transformed value.
+     */
+    public <V, F, T> T mapTo(F theGivenObject, Function<F, T> transformation) {
+        return (theGivenObject != null) ? transformation.apply(theGivenObject) : null;
     }
     
     //== Primitive types 'or' ==
