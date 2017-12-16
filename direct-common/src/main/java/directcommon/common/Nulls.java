@@ -52,8 +52,9 @@ public class Nulls {
      * Returns elseValue if theGivenObject is null. 
      * 
      * @param  theGivenObject  the given object.
-     * @param  elseValue       the supplier for when the given object is null.
+     * @param  elseValue       the return value for when the given object is null.
      * @return theGivenObject if not null or elseValue if null.
+     * @param  <T>  the data type of the given object.
      **/
     public <T> T or(T theGivenObject, T elseValue) {
         return (theGivenObject == null) ? elseValue : theGivenObject;
@@ -63,8 +64,9 @@ public class Nulls {
      * Returns the result of elseSupplier if the given object is null. 
      * 
      * @param theGivenObject  the given object.
-     * @param elseSupplier 
+     * @param elseSupplier    the supplier for when the given object is null.
      * @return theGivenObject if not null or value from the elseSupplier if null.
+     * @param  <T>  the data type of the given object.
      **/
     public <T> T orGet(T theGivenObject, Supplier<? extends T> elseSupplier) {
         return (theGivenObject == null) ? elseSupplier.get() : theGivenObject;
@@ -75,6 +77,7 @@ public class Nulls {
      * 
      * @param theGivenObject  the given object.
      * @return the optional value of the theGivenObject.
+     * @param  <T>  the data type of the given object.
      **/
     public <T> Optional<T> whenNotNull(T theGivenObject) {
         return Optional.ofNullable(theGivenObject);
@@ -85,6 +88,7 @@ public class Nulls {
      * 
      * @param theGivenObject  the given object.
      * @return the optional value of the theGivenObject.
+     * @param  <T>  the data type of the given object.
      **/
     public <T> Optional<T> toOptional(T theGivenObject) {
         return Optional.ofNullable(theGivenObject);
