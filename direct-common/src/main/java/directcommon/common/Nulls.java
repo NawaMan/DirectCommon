@@ -41,7 +41,7 @@ public class Nulls {
     /**
      * Returns {@code true} if theGivenObject is not null. 
      * 
-     * @param theGivenObject
+     * @param theGivenObject  the given object.
      * @return {@code true} if theGivenObject is not null.
      **/
     public boolean isNotNull(Object theGivenObject) {
@@ -51,8 +51,8 @@ public class Nulls {
     /**
      * Returns elseValue if theGivenObject is null. 
      * 
-     * @param  theGivenObject 
-     * @param  elseValue 
+     * @param  theGivenObject  the given object.
+     * @param  elseValue       the supplier for when the given object is null.
      * @return theGivenObject if not null or elseValue if null.
      **/
     public <T> T or(T theGivenObject, T elseValue) {
@@ -60,24 +60,34 @@ public class Nulls {
     }
     
     /**
-     * Extension method to create optional of theGivenObject. 
-     * 
-     * @param theGivenObject 
-     * @return the optional value of the theGivenObject.
-     **/
-    public <T> Optional<T> whenNotNull(T theGivenObject) {
-        return Optional.ofNullable(theGivenObject);
-    }
-    
-    /**
      * Returns the result of elseSupplier if the given object is null. 
      * 
-     * @param theGivenObject 
+     * @param theGivenObject  the given object.
      * @param elseSupplier 
      * @return theGivenObject if not null or value from the elseSupplier if null.
      **/
     public <T> T orGet(T theGivenObject, Supplier<? extends T> elseSupplier) {
         return (theGivenObject == null) ? elseSupplier.get() : theGivenObject;
+    }
+    
+    /**
+     * Extension method to create optional of theGivenObject. 
+     * 
+     * @param theGivenObject  the given object.
+     * @return the optional value of the theGivenObject.
+     **/
+    public <T> Optional<T> whenNotNull(T theGivenObject) {
+        return Optional.ofNullable(theGivenObject);
+    }
+
+    /**
+     * Extension method to create optional of theGivenObject. 
+     * 
+     * @param theGivenObject  the given object.
+     * @return the optional value of the theGivenObject.
+     **/
+    public <T> Optional<T> toOptional(T theGivenObject) {
+        return Optional.ofNullable(theGivenObject);
     }
     
 }
