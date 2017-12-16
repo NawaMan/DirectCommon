@@ -113,4 +113,53 @@ public class Nulls {
         return null;
     }
     
+    /**
+     * Return the given object if it is of the given class or else return null.
+     * 
+     * @param theGivenObject  the given object.
+     * @param theClass        the class.
+     * @return  the original object as the type class or null.
+     * @param  <T>  the data type of the given object.
+     */
+    public <T, S> S as(T theGivenObject, Class<S> theClass) {
+        if (theClass.isInstance(theGivenObject))
+            return theClass.cast(theGivenObject);
+        return null;
+    }
+    
+    //== Primitive types 'or' ==
+
+    /**
+     * Returns elseValue if theGivenInteger is null. 
+     * 
+     * @param  theGivenInteger  the given integer.
+     * @param  elseValue        the return value for when the given object is null.
+     * @return theGivenObject if not null or elseValue if null.
+     **/
+    public int or(Integer theGivenInteger, int elseValue) {
+        return (theGivenInteger == null) ? elseValue : theGivenInteger.intValue();
+    }
+    
+    /**
+     * Returns elseValue if theGivenLong is null. 
+     * 
+     * @param  theGivenLong  the given long.
+     * @param  elseValue     the return value for when the given object is null.
+     * @return theGivenObject if not null or elseValue if null.
+     **/
+    public long or(Long theGivenLong, long elseValue) {
+        return (theGivenLong == null) ? elseValue : theGivenLong.longValue();
+    }
+    
+    /**
+     * Returns elseValue if theGivenDouble is null. 
+     * 
+     * @param  theGivenDouble  the given double.
+     * @param  elseValue       the return value for when the given object is null.
+     * @return theGivenObject if not null or elseValue if null.
+     **/
+    public double or(Double theGivenDouble, double elseValue) {
+        return (theGivenDouble == null) ? elseValue : theGivenDouble.doubleValue();
+    }
+    
 }

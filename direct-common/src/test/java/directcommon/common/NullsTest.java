@@ -14,11 +14,15 @@ import lombok.experimental.ExtensionMethod;
 @ExtensionMethod({ Nulls.class })
 public class NullsTest {
     
-    private Predicate<String> contains(String needle) {
+    private static Predicate<String> contains(String needle) {
         return heystack-> { 
             return heystack.isNotNull()
                 && heystack.contains(needle);
         };
+    }
+    
+    private static Integer IntOf(int i) {
+        return Integer.valueOf(i);
     }
     
     @Test
@@ -30,6 +34,14 @@ public class NullsTest {
         assertEquals("Another string",      theOriginalString.when(contains("another" )).or("Another string"));
         assertEquals("Another string",      nullString       .when(contains("original")).or("Another string"));
         assertEquals("Another string",      nullString       .when(contains("another" )).or("Another string"));
+    }
+    
+    @Test
+    public void testAs() {
+        val i = IntOf(1234);
+        assertEquals(IntOf(1234), i.as(Integer.class));
+        assertEquals(null,        i.as(Double.class));
+        assertEquals(0.0,         i.as(Double.class).or(0.0), 0.0);
     }
     
 }

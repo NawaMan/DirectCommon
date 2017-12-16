@@ -1,6 +1,6 @@
 def thisGroup    = 'directcommon'
 def thisArtifact = 'common'
-def thisVersion  = '1.4.3'
+def thisVersion  = '1.4.5'
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
