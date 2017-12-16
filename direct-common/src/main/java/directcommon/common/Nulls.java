@@ -16,6 +16,7 @@
 package directcommon.common;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import lombok.experimental.UtilityClass;
@@ -92,6 +93,24 @@ public class Nulls {
      **/
     public <T> Optional<T> toOptional(T theGivenObject) {
         return Optional.ofNullable(theGivenObject);
+    }
+    
+    /**
+     * Return the given object if the test yields {@code true} or else return null.
+     * 
+     * @param theGivenObject  the given object.
+     * @param theTest         the test.
+     * @return  the original object or null.
+     * @param  <T>  the data type of the given object.
+     */
+    public <T> T when(T theGivenObject, Predicate<T> theTest) {
+        if (isNull(theGivenObject))
+            return null;
+        if (isNull(theTest))
+            return null;
+        if (theTest.test(theGivenObject))
+            return theGivenObject;
+        return null;
     }
     
 }
