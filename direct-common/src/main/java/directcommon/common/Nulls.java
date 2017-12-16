@@ -135,8 +135,10 @@ public class Nulls {
      * @param theGivenObject  the given object.
      * @param transformation  the transformation function.
      * @return  the transformed value.
+     * @param  <F>  the data type of the given object.
+     * @param  <T>  the data type of the target object.
      */
-    public <V, F, T> T mapTo(F theGivenObject, Function<F, T> transformation) {
+    public <F, T> T mapTo(F theGivenObject, Function<F, T> transformation) {
         return (theGivenObject != null) ? transformation.apply(theGivenObject) : null;
     }
     
