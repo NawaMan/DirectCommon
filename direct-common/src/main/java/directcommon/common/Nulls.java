@@ -120,6 +120,7 @@ public class Nulls {
      * @param theClass        the class.
      * @return  the original object as the type class or null.
      * @param  <T>  the data type of the given object.
+     * @param  <S>  the data type of the returned object.
      */
     public <T, S> S as(T theGivenObject, Class<S> theClass) {
         if (theClass.isInstance(theGivenObject))
